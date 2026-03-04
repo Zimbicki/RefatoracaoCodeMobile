@@ -1,0 +1,26 @@
+.
+  ARCH.md
+  README.md
+  TEACHER_NOTES.md
+  pubspec.yaml
+  lib/
+    main.dart
+    ui/
+      app_root.dart
+    screens/
+      app_errors.dart
+      todo_local_datasource.dart
+      todos_page.dart
+    widgets/
+      add_todo_dialog.dart
+      todo_model.dart
+    viewmodels/
+      todo_viewmodel.dart
+    models/
+      todo.dart
+    utils/
+      todo_remote_datasource.dart
+    services/
+      todo_repository.dart
+    repositories/
+      todo_repository_impl.dart
