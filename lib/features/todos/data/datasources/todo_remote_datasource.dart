@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../widgets/todo_model.dart';
+import '../models/todo_model.dart';
 
 class TodoRemoteDataSource {
   final http.Client _client;

@@ -1,11 +1,17 @@
-import '../models/todo.dart';
-import '../services/todo_repository.dart';
-import '../utils/todo_remote_datasource.dart';
-import '../screens/todo_local_datasource.dart';
+import '../../domain/entities/todo.dart';
+import '../../domain/repositories/todo_repository.dart';
+import '../datasources/todo_remote_datasource.dart';
+import '../datasources/todo_local_datasource.dart';
 
 class TodoRepositoryImpl implements TodoRepository {
-  final TodoRemoteDataSource _remote = TodoRemoteDataSource();
-  final TodoLocalDataSource _local = TodoLocalDataSource();
+  final TodoRemoteDataSource _remote;
+  final TodoLocalDataSource _local;
+
+  TodoRepositoryImpl({
+    TodoRemoteDataSource? remote,
+    TodoLocalDataSource? local,
+  })  : _remote = remote ?? TodoRemoteDataSource(),
+        _local = local ?? TodoLocalDataSource();
 
   @override
   Future<TodoFetchResult> fetchTodos({bool forceRefresh = false}) async {
@@ -15,7 +21,7 @@ class TodoRepositoryImpl implements TodoRepository {
     await _local.saveLastSync(now);
 
     final lastSync = await _local.getLastSync();
-    final label = lastSync == null ? null : lastSync.toLocal().toString();
+    final label = lastSync?.toLocal().toString();
 
     return TodoFetchResult(
       todos: models.map((m) => Todo(id: m.id, title: m.title, completed: m.completed)).toList(),
